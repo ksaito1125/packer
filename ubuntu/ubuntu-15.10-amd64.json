@@ -33,11 +33,23 @@
       ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
     ]
   }],
-  "post-processors": [{
-    "type": "vagrant",
-    "compression_level": "{{user `compression_level`}}",
-    "output": "ubuntu-15.10-amd64.box"
-  }],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "compression_level": "{{user `compression_level`}}",
+      "output": "ubuntu-15.10-amd64.box"
+    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "ksaito/packer-ubuntu",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+	"version": "15.10"
+      }
+    }
+  ],
   "variables": {
     "compression_level": "6",
     "cpus": "1",
