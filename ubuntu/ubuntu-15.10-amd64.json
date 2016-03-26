@@ -2,11 +2,11 @@
   "builders": [{
     "type": "virtualbox-iso",
     "guest_os_type": "Ubuntu_64",
-    "iso_url": "{{user `mirror`}}/15.10/ubuntu-15.10-server-amd64.iso",
+    "iso_url": "{{user `mirror`}}/{{user `version`}}/ubuntu-{{user `version`}}-server-amd64.iso",
     "iso_checksum": "86aa35a986eba6e5ad30e3d486d57efe6803ae7ea4859b0216953e9e62871131",
     "iso_checksum_type": "sha256",
-    "output_directory": "output-ubuntu-15.10-amd64",
-    "vm_name": "packer-ubuntu-15.10-amd64",
+    "output_directory": "output-ubuntu-{{user `version`}}-amd64",
+    "vm_name": "packer-ubuntu-{{user `version`}}-amd64",
     "disk_size": "{{user `disk_size`}}",
     "headless": "{{user `headless`}}",
     "http_directory": "http",
@@ -21,7 +21,7 @@
       "biosdevname=0 ",
       "auto-install/enable=true ",
       "debconf/priority=critical ",
-      "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu-15.10/preseed.cfg ",
+      "preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu-{{user `version`}}/preseed.cfg ",
       "<enter>"
     ],
     "ssh_wait_timeout": "60m",
@@ -37,7 +37,7 @@
     {
       "type": "vagrant",
       "compression_level": "{{user `compression_level`}}",
-      "output": "ubuntu-15.10-amd64.box"
+      "output": "ubuntu-{{user `version`}}-amd64.box"
     },
     {
       "type": "atlas",
@@ -46,7 +46,7 @@
       "artifact_type": "vagrant.box",
       "metadata": {
         "provider": "virtualbox",
-	"version": "15.10"
+	"version": "{{user `version`}}.{{user `build`}}"
       }
     }
   ],
@@ -56,6 +56,8 @@
     "disk_size": "40000",
     "headless": "false",
     "memory": "512",
-    "mirror": "http://releases.ubuntu.com"
+    "mirror": "http://releases.ubuntu.com",
+    "version": "15.10",
+    "build": "{{env `ATLAS_BUILD_CONFIGURATION_VERSION`}}"
   }
 }
