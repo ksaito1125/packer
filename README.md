@@ -30,12 +30,12 @@ $ packer build [OS名]-[バージョン].json
 
 ## 公開
 
-
+下記を行うことで、GitHubを更新すると自動的にboxが作成されます。
 
 * [vagrantcloud](https://atlas.hashicorp.com)にログイン
-* 「builds」を選択
-* 「Build Vagrant Boxes with Packer and Atlas」を選択
-* メニューに従ってビルド
+* packerを選択してconfigurationを作成
+* Inject artifact ID during buildに出力先のboxを指定
+* Integrationを選択してGitHubのリポジトリ、ブランチ、ディレクトリ、ファイルを指定
 
 ### 使い方 ###
 
