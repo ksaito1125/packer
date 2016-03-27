@@ -33,6 +33,12 @@
       ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
     ]
   }],
+  "provisioners": [{
+    "type": "shell",
+    "scripts": [
+      "../scripts/vagrant.sh"
+    ]
+  }],
   "post-processors": [
     {
       "type": "vagrant",
