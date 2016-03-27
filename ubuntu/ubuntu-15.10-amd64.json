@@ -36,7 +36,7 @@
   "provisioners": [{
     "type": "shell",
     "scripts": [
-      "../scripts/vagrant.sh"
+      "./scripts/vagrant.sh"
     ]
   }],
   "post-processors": [
