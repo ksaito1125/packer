@@ -27,7 +27,7 @@
     "ssh_wait_timeout": "60m",
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
-    "shutdown_command": "sudo poweroff",
+    "shutdown_command": "sudo shutdown -h now",
     "vboxmanage": [
       ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
       ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
