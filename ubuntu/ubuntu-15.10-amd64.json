@@ -33,12 +33,28 @@
       ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
     ]
   }],
-  "provisioners": [{
-    "type": "shell",
-    "scripts": [
-      "./scripts/vagrant.sh"
-    ]
-  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "./scripts/vagrant.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "./scripts/ansible.sh"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/main.yml"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "./scripts/cleanup.sh"
+    }
+  ],
   "post-processors": [
     {
       "type": "vagrant",
@@ -52,9 +68,8 @@
       "artifact_type": "vagrant.box",
       "metadata": {
         "provider": "virtualbox",
-	"version": "{{user `version`}}.{{user `build`}}"
+       "version": "{{user `version`}}.{{user `build`}}"
       }
-    }
   ],
   "variables": {
     "compression_level": "6",

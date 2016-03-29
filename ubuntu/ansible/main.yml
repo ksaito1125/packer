@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install packages(additional)
+    apt: pkg={{item}} state=installed
+    with_items:
+      - keychain
+      - nmap
+      - lv
+      - git
+      - git-svn
+      - subversion
+      - bashdb
+      - shunit2
+      - dstat
+      - htop
+      - build-essential
+      - linux-headers-{{ansible_kernel}}
+      - python-boto
+      - awscli
+      - ruby-serverspec
